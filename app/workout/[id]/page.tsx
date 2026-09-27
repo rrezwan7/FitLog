@@ -1,5 +1,7 @@
 import Image from "next/image";
 import type { Workout } from "@/types/workout";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 type WorkoutDetailsPageProps = {
     params: Promise<{
@@ -25,6 +27,7 @@ export default async function WorkoutDetailsPage({
 
     return (
         <main className="min-h-screen bg-[#0b0c10] text-white">
+            <Header />
 
             <section className="max-w-7xl mx-auto px-4 py-10">
 
@@ -182,6 +185,7 @@ export default async function WorkoutDetailsPage({
 
 
             </section>
+            <Footer />
 
         </main>
     );
