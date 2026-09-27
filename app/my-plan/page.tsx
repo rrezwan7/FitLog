@@ -15,7 +15,7 @@ export default function MyPlanPage() {
         searchParams.get("tab") === "saved"
             ? "saved"
             : "plan";
-
+    const [sortBy, setSortBy] = useState("duration");
 
     const {
         todaysPlan,
@@ -23,6 +23,35 @@ export default function MyPlanPage() {
         removeFromTodaysPlan,
         removeFromSaved,
     } = useWorkout();
+
+    const currentWorkouts =
+        activeTab === "plan"
+            ? todaysPlan
+            : savedWorkouts;
+
+    const totalExercises = currentWorkouts.length;
+
+    const totalMinutes = currentWorkouts.reduce(
+        (total, workout) => total + workout.duration,
+        0
+    );
+
+    const totalCalories = currentWorkouts.reduce(
+        (total, workout) => total + workout.caloriesBurned,
+        0
+    );
+
+    const sortedWorkouts = [...currentWorkouts].sort((a, b) => {
+        if (sortBy === "calories") {
+            return b.caloriesBurned - a.caloriesBurned;
+        }
+
+        if (sortBy === "rating") {
+            return b.rating - a.rating;
+        }
+
+        return b.duration - a.duration;
+    });
 
     return (
         <main className="min-h-screen bg-[#0b0c10] text-white">
@@ -40,6 +69,38 @@ export default function MyPlanPage() {
                 </div>
 
                 {/* Tabs */}
+                {/* Workout Summary */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    <div className="bg-[#15171d] border border-gray-800 rounded-2xl p-5">
+                        <p className="text-gray-400 text-sm">
+                            Total Exercises
+                        </p>
+
+                        <p className="text-3xl font-bold text-white mt-2">
+                            {totalExercises}
+                        </p>
+                    </div>
+
+                    <div className="bg-[#15171d] border border-gray-800 rounded-2xl p-5">
+                        <p className="text-gray-400 text-sm">
+                            Total Minutes
+                        </p>
+
+                        <p className="text-3xl font-bold text-white mt-2">
+                            {totalMinutes}
+                        </p>
+                    </div>
+
+                    <div className="bg-[#15171d] border border-gray-800 rounded-2xl p-5">
+                        <p className="text-gray-400 text-sm">
+                            Total Calories
+                        </p>
+
+                        <p className="text-3xl font-bold text-white mt-2">
+                            {totalCalories}
+                        </p>
+                    </div>
+                </div>
                 <div className="flex gap-2 mb-8 border-b border-gray-800">
                     <Link
                         href="/my-plan?tab=plan"
@@ -62,6 +123,25 @@ export default function MyPlanPage() {
                     </Link>
                 </div>
 
+                {/* Dropdown for sorting */}
+                <div className="flex justify-end mb-6">
+                    <div className="relative">
+                        <select
+                            value={sortBy}
+                            onChange={(event) => setSortBy(event.target.value)}
+                            className="appearance-none bg-[#15171d] border border-gray-700 text-white rounded-full px-5 py-2 pr-10 text-sm font-medium outline-none cursor-pointer"
+                        >
+                            <option value="duration">Sort By: Duration</option>
+                            <option value="calories">Sort By: Calories</option>
+                            <option value="rating">Sort By: Rating</option>
+                        </select>
+
+                        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+                            ▼
+                        </span>
+                    </div>
+                </div>
+
                 {/* My Plan */}
                 {activeTab === "plan" && (
                     <>
@@ -79,7 +159,7 @@ export default function MyPlanPage() {
 
                         {todaysPlan.length > 0 && (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {todaysPlan.map((workout) => (
+                                {sortedWorkouts.map((workout) => (
                                     <div key={workout.id}>
                                         <WorkoutCard workout={workout} />
 
@@ -117,7 +197,7 @@ export default function MyPlanPage() {
 
                         {savedWorkouts.length > 0 && (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {savedWorkouts.map((workout) => (
+                                {sortedWorkouts.map((workout) => (
                                     <div key={workout.id}>
                                         <WorkoutCard workout={workout} />
 

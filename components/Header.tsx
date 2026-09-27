@@ -63,18 +63,18 @@ export default function Header() {
 
                     <Link
                         href="/my-plan"
-                        className="flex items-center gap-2 bg-[#ccff00] text-black font-bold px-3 py-1.5 rounded-full text-xs"
+                        className="flex items-center gap-2  text-gray-300 font-bold px-3 py-1.5  text-xs"
                     >
                         <span>Plan</span>
 
-                        <span className="bg-black text-[#ccff00] w-5 h-5 rounded-full flex items-center justify-center text-[11px]">
+                        <span className="bg-[#ccff00] text-black w-5 h-5 rounded-full flex items-center justify-center text-[11px]">
                             {todaysPlan.length}
                         </span>
                     </Link>
 
                     <Link
                         href="/my-plan?tab=saved"
-                        className="flex items-center gap-2 border border-gray-700 text-gray-300 font-bold px-3 py-1.5 rounded-full text-xs"
+                        className="flex items-center gap-2  text-gray-300 font-bold px-3 py-1.5 rounded-full text-xs"
                     >
                         <span>Saved</span>
 
