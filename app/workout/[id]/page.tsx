@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Workout } from "@/types/workout";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WorkoutActions from "@/components/WorkoutActions";
 
 type WorkoutDetailsPageProps = {
     params: Promise<{
@@ -164,17 +165,8 @@ export default async function WorkoutDetailsPage({
                             </ol>
 
                         </div>
-                        <div className="flex flex-col sm:flex-row gap-4 mt-10">
-
-                            <button className="flex-1 py-3 px-6 rounded-full bg-[#ccff00] text-[#15171d] font-bold hover:bg-[#b8e600] transition-colors">
-                                Add to Today&apos;s Plan
-                            </button>
-
-                            <button className="flex-1 py-3 px-6 rounded-full border border-gray-700 text-white font-bold hover:bg-[#15171d] transition-colors">
-                                Save for Later
-                            </button>
-
-                        </div>
+                        {/* Action Buttons */}
+                        <WorkoutActions workout={workout} />
 
                     </div>
                 </div>
