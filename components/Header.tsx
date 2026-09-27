@@ -1,7 +1,11 @@
+"use client";
+import { useWorkout } from "@/context/WorkoutContext";
 import Image from "next/image";
 import logo from "@/src/assets/logo.png";
 
 export default function Header() {
+    const { todaysPlan, savedWorkouts } = useWorkout();
+
     return (
         <header className="sticky top-0 z-40 bg-[#0b0c10]/90 backdrop-blur-md border-b border-gray-800/80 px-4 lg:px-12 py-4">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -38,7 +42,7 @@ export default function Header() {
                         <span>Plan</span>
 
                         <span className="bg-black text-[#ccff00] w-5 h-5 rounded-full flex items-center justify-center text-[11px]">
-                            0
+                            {todaysPlan.length}
                         </span>
                     </button>
 
@@ -46,7 +50,7 @@ export default function Header() {
                         <span>Saved</span>
 
                         <span className="bg-gray-800 text-white w-5 h-5 rounded-full flex items-center justify-center text-[11px]">
-                            0
+                            {savedWorkouts.length}
                         </span>
                     </button>
 
