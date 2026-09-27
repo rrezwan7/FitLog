@@ -13,8 +13,11 @@ export default function Header() {
                         alt="FitLog"
                         width={140}
                         height={40}
-                        className="h-10 w-auto"
+                        className="h-10 w-auto px-2 gap-2"
                     />
+                    <span>
+                        <h1 className="text-2xl font-bold"> FITLOG</h1>
+                    </span>
                 </div>
 
                 {/* Navigation */}
