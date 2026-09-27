@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizePackageImports: ["lucide-react"], // Tells Turbopack how to handle the icon sub-folders safely
+  },
 };
 
 export default nextConfig;

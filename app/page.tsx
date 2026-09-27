@@ -4,6 +4,8 @@ import Banner from "@/components/Banner";
 import WorkoutCard from "@/components/WorkoutCard";
 import type { Workout } from "@/types/workout";
 
+import { AiFillAccountBook } from "react-icons/ai";
+
 const API_URL = "https://api.api-store.workers.dev/api/fitlog";
 
 export default async function Home() {

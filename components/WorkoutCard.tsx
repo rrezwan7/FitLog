@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Workout } from "@/types/workout";
+import { Clock, Star, Flame } from "lucide-react"
+
 
 type WorkoutCardProps = {
     workout: Workout;
@@ -50,10 +52,11 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
 
                 {/* Workout Info */}
                 <div className="flex items-center gap-3 mt-4 text-sm text-gray-400">
+                    <span><Clock /></span>
                     <span>{workout.duration} min</span>
-                    <span>•</span>
+                    <span><Flame /></span>
                     <span>{workout.caloriesBurned} Kcal</span>
-                    <span>•</span>
+                    <span><Star /></span>
                     <span>{workout.rating}</span>
                 </div>
 
