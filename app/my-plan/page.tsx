@@ -6,9 +6,11 @@ import WorkoutCard from "@/components/WorkoutCard";
 import { useWorkout } from "@/context/WorkoutContext";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { useState } from "react";
 
-export default function MyPlanPage() {
+
+function MyPlanContent() {
     const searchParams = useSearchParams();
 
     const activeTab =
@@ -219,5 +221,13 @@ export default function MyPlanPage() {
 
             <Footer />
         </main>
+    );
+}
+
+export default function MyPlanPage() {
+    return (
+        <Suspense fallback={null}>
+            <MyPlanContent />
+        </Suspense>
     );
 }
